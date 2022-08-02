@@ -17,7 +17,7 @@ public class BookController {
 
     private final BookService bookService;
 
-    @GetMapping("/allBooks")
+    @GetMapping("/all")
     public ResponseEntity<List<BookDto>> getAllBooks(){
        return ResponseEntity.ok(bookService.getAllBooks());
     }
@@ -28,7 +28,7 @@ public class BookController {
         return  bookService.findBookById(id);
     }
 
-    @PostMapping("/newBook")
+    @PostMapping("/create")
     public ResponseEntity<BookDto> createBook(@RequestBody BookRequest request){
         return ResponseEntity.ok(bookService.createBook(request));
     }
