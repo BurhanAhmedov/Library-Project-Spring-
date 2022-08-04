@@ -1,23 +1,16 @@
 package com.example.bookstorespring.dto;
 
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Id;
-
-
-@Data
+@Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class BookDto {
-    @Id
-    long id;
-
+public class AuthorDto {
+    Long id;
     String name;
-    double price;
-    int stock;
-
-
-
+    String surname;
 
 }

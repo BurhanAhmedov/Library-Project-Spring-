@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/bookstore")
+@RequestMapping("/book")
 @RequiredArgsConstructor
 
 public class BookController {
@@ -23,9 +23,9 @@ public class BookController {
     }
 
     @GetMapping("/find/{id}")
-    public BookDto findBookById(@PathVariable  long id){
+    public ResponseEntity<BookDto> findBookById(@PathVariable  long id){
 
-        return  bookService.findBookById(id);
+        return  ResponseEntity.ok(bookService.findBookById(id));
     }
 
     @PostMapping("/create")
@@ -35,8 +35,8 @@ public class BookController {
 
 
     @PutMapping("/edit/book/{id}")
-    public BookDto editBook(@RequestBody BookRequest request, @PathVariable long id){
-        return bookService.editBook(request,id);
+    public ResponseEntity<BookDto> editBook(@RequestBody BookRequest request, @PathVariable long id){
+        return ResponseEntity.ok(bookService.editBook(request,id));
     }
 
     @DeleteMapping("/delete/book/{id}")

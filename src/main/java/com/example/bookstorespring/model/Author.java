@@ -1,8 +1,9 @@
 package com.example.bookstorespring.model;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import javax.persistence.*;
 
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -10,20 +11,17 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-
-public class Book {
+public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    Long id;
 
     @Column(nullable = false)
     String name;
 
     @Column(nullable = false)
-    double price;
+    String surname;
 
-    @Column(nullable = false)
-    int stock;
 
 
 }
