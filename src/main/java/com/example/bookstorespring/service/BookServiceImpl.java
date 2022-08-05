@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
-    private  final AuthorRepository authorRepository;
+    private final AuthorRepository authorRepository;
 
 
     @Override
@@ -31,7 +31,7 @@ public class BookServiceImpl implements BookService {
         Book book = BookRequestMapper.mapFromRequest(request);
 
         Optional<Author> authorById = authorRepository.findById(request.getAuthorId());
-        if (authorById.isPresent()){
+        if (authorById.isPresent()) {
             Author author = authorById.get();
             book.setAuthor(author);
         }

@@ -29,8 +29,8 @@ public class Book {
     @Column(nullable = false)
     int stock;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "author_id",referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
     Author author;
 
 
