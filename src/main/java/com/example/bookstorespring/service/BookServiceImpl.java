@@ -34,6 +34,8 @@ public class BookServiceImpl implements BookService {
         if (authorById.isPresent()) {
             Author author = authorById.get();
             book.setAuthor(author);
+        }else {
+            throw new NullPointerException("Author not found");
         }
 
         Book creatingBook = bookRepository.save(book);
