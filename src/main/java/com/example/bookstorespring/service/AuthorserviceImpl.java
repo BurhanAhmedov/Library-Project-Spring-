@@ -47,7 +47,7 @@ public class AuthorserviceImpl implements AuthorService {
                     .map(AuthorDTOMapper::mapFromAuthor)
                     .collect(Collectors.toList());
             return authorDtoList;
-        }else{
+        } else {
             throw new NullPointerException();
         }
 
@@ -56,7 +56,7 @@ public class AuthorserviceImpl implements AuthorService {
     @Override
     public AuthorDto findAuthorById(long id) {
         Optional<Author> author = authorRepository.findById(id);
-        if(author.isPresent()) {
+        if (author.isPresent()) {
 
             Author findingAuthor = author.get();
 
@@ -80,7 +80,7 @@ public class AuthorserviceImpl implements AuthorService {
     public AuthorDto editAuthor(AuthorRequest authorRequest, long id) {
         Optional<Author> authorOptional = authorRepository.findById(id);
 
-        if (authorOptional.isPresent()){
+        if (authorOptional.isPresent()) {
             Author author = authorOptional.get();
             Author authorFromRequest = AuthorRequestMapper.mapFromRequest(authorRequest);
 
@@ -90,7 +90,7 @@ public class AuthorserviceImpl implements AuthorService {
             author.setSurname(authorFromRequest.getSurname());
             authorRepository.save(author);
 
-            BeanUtils.copyProperties(author,authorDto);
+            BeanUtils.copyProperties(author, authorDto);
 
             return authorDto;
 

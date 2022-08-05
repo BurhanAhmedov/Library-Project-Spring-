@@ -6,10 +6,10 @@ import org.springframework.beans.BeanUtils;
 
 public class AuthorRequestMapper {
 
-    public static Author mapFromRequest(AuthorRequest authorRequest){
+    public static Author mapFromRequest(AuthorRequest authorRequest) {
         Author author = new Author();
 
-        BeanUtils.copyProperties(authorRequest,author);
+        BeanUtils.copyProperties(authorRequest, author);
 
         return author;
     }

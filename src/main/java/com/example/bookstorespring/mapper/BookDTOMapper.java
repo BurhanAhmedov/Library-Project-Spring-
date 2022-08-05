@@ -5,10 +5,9 @@ import com.example.bookstorespring.dto.BookDto;
 import com.example.bookstorespring.model.Book;
 
 
+public class BookDTOMapper {
 
-public  class BookDTOMapper {
-
-    public static BookDto mapFromBook(Book book){
+    public static BookDto mapFromBook(Book book) {
 
         BookDto bookDto = new BookDto();
 
@@ -16,6 +15,7 @@ public  class BookDTOMapper {
         bookDto.setId(book.getId());
         bookDto.setStock(book.getStock());
         bookDto.setName(book.getName());
+        bookDto.setAuthor(AuthorDTOMapper.mapFromAuthor(book.getAuthor()));
 
         return bookDto;
     }

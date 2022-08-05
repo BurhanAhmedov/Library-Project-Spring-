@@ -18,29 +18,29 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<BookDto>> getAllBooks(){
-       return ResponseEntity.ok(bookService.getAllBooks());
+    public ResponseEntity<List<BookDto>> getAllBooks() {
+        return ResponseEntity.ok(bookService.getAllBooks());
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<BookDto> findBookById(@PathVariable  long id){
+    public ResponseEntity<BookDto> findBookById(@PathVariable long id) {
 
-        return  ResponseEntity.ok(bookService.findBookById(id));
+        return ResponseEntity.ok(bookService.findBookById(id));
     }
 
     @PostMapping("/create")
-    public ResponseEntity<BookDto> createBook(@RequestBody BookRequest request){
+    public ResponseEntity<BookDto> createBook(@RequestBody BookRequest request) {
         return ResponseEntity.ok(bookService.createBook(request));
     }
 
 
     @PutMapping("/edit/book/{id}")
-    public ResponseEntity<BookDto> editBook(@RequestBody BookRequest request, @PathVariable long id){
-        return ResponseEntity.ok(bookService.editBook(request,id));
+    public ResponseEntity<BookDto> editBook(@RequestBody BookRequest request, @PathVariable long id) {
+        return ResponseEntity.ok(bookService.editBook(request, id));
     }
 
     @DeleteMapping("/delete/book/{id}")
-    public ResponseEntity<String> deleteBook(@PathVariable long id){
+    public ResponseEntity<String> deleteBook(@PathVariable long id) {
         bookService.deleteBook(id);
         return ResponseEntity.ok("Successfully deleted");
     }

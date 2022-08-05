@@ -5,7 +5,7 @@ import com.example.bookstorespring.model.Author;
 
 public class AuthorDTOMapper {
 
-    public static AuthorDto mapFromAuthor(Author author){
+    public static AuthorDto mapFromAuthor(Author author) {
 
         AuthorDto authorDto = new AuthorDto();
 

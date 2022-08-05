@@ -1,11 +1,10 @@
 package com.example.bookstorespring.request;
 
 
+
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
-
-
 
 
 @Data
@@ -16,5 +15,6 @@ public class BookRequest {
     String name;
     double price;
     int stock;
+    long authorId;
 
 }

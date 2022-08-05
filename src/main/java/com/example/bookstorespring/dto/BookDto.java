@@ -16,8 +16,7 @@ public class BookDto {
     String name;
     double price;
     int stock;
-
-
+    AuthorDto author;
 
 
 }

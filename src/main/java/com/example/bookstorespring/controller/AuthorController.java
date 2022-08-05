@@ -17,7 +17,7 @@ public class AuthorController {
 
     private final AuthorService authorService;
 
-    @PostMapping("/create/author")
+    @PostMapping("/new/author")
     public ResponseEntity<AuthorDto> createAuthor(@RequestBody AuthorRequest authorRequest) {
         return ResponseEntity.ok(authorService.createAuthor(authorRequest));
 
@@ -28,18 +28,18 @@ public class AuthorController {
         return ResponseEntity.ok(authorService.getAllAuthors());
     }
 
-    @GetMapping("/find/{id}")
-    public ResponseEntity<AuthorDto> findAuthorById(@PathVariable  long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<AuthorDto> findAuthorById(@PathVariable long id) {
         return ResponseEntity.ok(authorService.findAuthorById(id));
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<AuthorDto> editAuthor(@PathVariable long id, @RequestBody AuthorRequest authorRequest){
+    @PutMapping("/{id}")
+    public ResponseEntity<AuthorDto> editAuthor(@PathVariable long id, @RequestBody AuthorRequest authorRequest) {
         return ResponseEntity.ok(authorService.editAuthor(authorRequest, id));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity deleteAuthor(long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteAuthor(long id) {
 
         return ResponseEntity.ok("Author deleted successfully.");
     }

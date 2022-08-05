@@ -1,6 +1,9 @@
 package com.example.bookstorespring.model;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+
 import javax.persistence.*;
 
 
@@ -12,6 +15,7 @@ import javax.persistence.*;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
 public class Book {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
@@ -24,6 +28,10 @@ public class Book {
 
     @Column(nullable = false)
     int stock;
+
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "author_id",referencedColumnName = "id")
+    Author author;
 
 
 }

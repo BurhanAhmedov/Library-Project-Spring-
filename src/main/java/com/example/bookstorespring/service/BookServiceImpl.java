@@ -3,7 +3,9 @@ package com.example.bookstorespring.service;
 import com.example.bookstorespring.dto.BookDto;
 import com.example.bookstorespring.mapper.BookDTOMapper;
 import com.example.bookstorespring.mapper.BookRequestMapper;
+import com.example.bookstorespring.model.Author;
 import com.example.bookstorespring.model.Book;
+import com.example.bookstorespring.repository.AuthorRepository;
 import com.example.bookstorespring.repository.BookRepository;
 import com.example.bookstorespring.request.BookRequest;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +23,20 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
+    private  final AuthorRepository authorRepository;
 
 
     @Override
     public BookDto createBook(BookRequest request) {
         Book book = BookRequestMapper.mapFromRequest(request);
-        Book creatingBook = bookRepository.save(book);
 
+        Optional<Author> authorById = authorRepository.findById(request.getAuthorId());
+        if (authorById.isPresent()){
+            Author author = authorById.get();
+            book.setAuthor(author);
+        }
+
+        Book creatingBook = bookRepository.save(book);
 
         BookDto bookDto = new BookDto();
         BeanUtils.copyProperties(creatingBook, bookDto);

@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Author {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -21,7 +22,6 @@ public class Author {
 
     @Column(nullable = false)
     String surname;
-
 
 
 }
