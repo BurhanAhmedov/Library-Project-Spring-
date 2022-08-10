@@ -72,11 +72,6 @@ public class AuthorserviceImpl implements AuthorService {
     }
 
     @Override
-    public void deleteAuthor(long id) {
-        authorRepository.deleteById(id);
-    }
-
-    @Override
     public AuthorDto editAuthor(AuthorRequest authorRequest, long id) {
         Optional<Author> authorOptional = authorRepository.findById(id);
 
@@ -98,4 +93,10 @@ public class AuthorserviceImpl implements AuthorService {
 
         throw new NullPointerException("Author not found!");
     }
+
+    @Override
+    public void deleteAuthor(long id) {
+        authorRepository.deleteById(id);
+    }
+
 }
