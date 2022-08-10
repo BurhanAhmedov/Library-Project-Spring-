@@ -1,12 +1,14 @@
 package com.example.bookstorespring.dto;
 
+import com.example.bookstorespring.model.Author;
 import lombok.AccessLevel;
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Id;
+
+import java.util.List;
 
 
 @Getter
@@ -17,7 +19,7 @@ public class BookDto {
     String name;
     double price;
     int stock;
-    AuthorDto author;
+    List<Author> authorList;
 
 
 }

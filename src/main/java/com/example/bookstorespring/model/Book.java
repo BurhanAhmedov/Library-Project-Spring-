@@ -5,6 +5,7 @@ import lombok.experimental.FieldDefaults;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Getter
@@ -29,9 +30,9 @@ public class Book {
     @Column(nullable = false)
     int stock;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id", referencedColumnName = "id")
-    Author author;
+    List<Author> authorList;
 
 
 }

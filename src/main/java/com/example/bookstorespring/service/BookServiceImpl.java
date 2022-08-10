@@ -30,10 +30,9 @@ public class BookServiceImpl implements BookService {
     public BookDto createBook(BookRequest request) {
         Book book = BookRequestMapper.mapFromRequest(request);
 
-        Optional<Author> authorById = authorRepository.findById(request.getAuthorId());
-        if (authorById.isPresent()) {
-            Author author = authorById.get();
-            book.setAuthor(author);
+        List<Author> authorListById = authorRepository.findAllById(request.getAuthorIds());
+        if (!authorListById.isEmpty()) {
+            book.setAuthorList(authorListById);
         }else {
             throw new NullPointerException("Author not found");
         }

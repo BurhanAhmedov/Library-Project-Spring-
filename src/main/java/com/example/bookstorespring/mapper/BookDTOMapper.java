@@ -1,6 +1,4 @@
 package com.example.bookstorespring.mapper;
-
-
 import com.example.bookstorespring.dto.BookDto;
 import com.example.bookstorespring.model.Book;
 
@@ -15,7 +13,8 @@ public class BookDTOMapper {
         bookDto.setId(book.getId());
         bookDto.setStock(book.getStock());
         bookDto.setName(book.getName());
-        bookDto.setAuthor(AuthorDTOMapper.mapFromAuthor(book.getAuthor()));
+        bookDto.setAuthorList(book.getAuthorList());
+
 
         return bookDto;
     }
