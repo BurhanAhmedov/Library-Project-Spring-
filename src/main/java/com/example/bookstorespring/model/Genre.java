@@ -3,7 +3,10 @@ package com.example.bookstorespring.model;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Getter
 @Setter
@@ -11,17 +14,11 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Author {
-
+public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
-    @Column(nullable = false)
     String name;
-
-    @Column(nullable = false)
-    String surname;
-
 
 }

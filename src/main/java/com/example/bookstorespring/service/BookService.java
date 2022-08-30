@@ -1,20 +1,20 @@
 package com.example.bookstorespring.service;
 
-import com.example.bookstorespring.dto.BookDto;
+import com.example.bookstorespring.dto.BookDTO;
 import com.example.bookstorespring.request.BookRequest;
 
 import java.util.List;
 
 public interface BookService {
+    BookDTO createBook(BookRequest request);
 
-    List<BookDto> getAllBooks();
+    List<BookDTO> getAllBooks();
 
-    BookDto findBookById(long bookId);
+    BookDTO findBookById(long bookId);
 
-    BookDto createBook(BookRequest request);
+
+    BookDTO editBook(BookRequest request, long id);
 
     void deleteBook(long id);
-
-    BookDto editBook(BookRequest request, long id);
 
 }

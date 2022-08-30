@@ -1,13 +1,13 @@
 package com.example.bookstorespring.mapper;
 
-import com.example.bookstorespring.dto.AuthorDto;
+import com.example.bookstorespring.dto.AuthorDTO;
 import com.example.bookstorespring.model.Author;
 
 public class AuthorDTOMapper {
 
-    public static AuthorDto mapFromAuthor(Author author) {
+    public static AuthorDTO mapFromAuthor(Author author) {
 
-        AuthorDto authorDto = new AuthorDto();
+        AuthorDTO authorDto = new AuthorDTO();
 
         authorDto.setId(author.getId());
         authorDto.setName(author.getName());

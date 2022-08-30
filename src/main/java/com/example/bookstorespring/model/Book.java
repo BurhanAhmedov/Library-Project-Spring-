@@ -3,7 +3,6 @@ package com.example.bookstorespring.model;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -33,6 +32,10 @@ public class Book {
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     List<Author> authorList;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "genre_id", referencedColumnName = "id")
+    List<Genre> genreList;
 
 
 }

@@ -8,9 +8,8 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AuthorDto {
-    Long id;
+public class GenreDTO {
+    long id;
     String name;
-    String surname;
 
 }

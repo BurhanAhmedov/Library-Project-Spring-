@@ -1,6 +1,6 @@
 package com.example.bookstorespring.service;
 
-import com.example.bookstorespring.dto.AuthorDto;
+import com.example.bookstorespring.dto.AuthorDTO;
 import com.example.bookstorespring.mapper.AuthorDTOMapper;
 import com.example.bookstorespring.mapper.AuthorRequestMapper;
 import com.example.bookstorespring.model.Author;
@@ -18,19 +18,19 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class AuthorserviceImpl implements AuthorService {
+public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository authorRepository;
 
 
     @Override
-    public AuthorDto createAuthor(AuthorRequest authorRequest) {
+    public AuthorDTO createAuthor(AuthorRequest authorRequest) {
 
         Author author = AuthorRequestMapper.mapFromRequest(authorRequest);
         log.info("request map to author");
         authorRepository.save(author);
         log.info("author save");
-        AuthorDto authorDto = new AuthorDto();
+        AuthorDTO authorDto = new AuthorDTO();
 
         BeanUtils.copyProperties(author, authorDto);
         log.info("author copy to dto");
@@ -38,12 +38,12 @@ public class AuthorserviceImpl implements AuthorService {
     }
 
     @Override
-    public List<AuthorDto> getAllAuthors() {
+    public List<AuthorDTO> getAllAuthors() {
 
         List<Author> authorList = authorRepository.findAll();
 
         if (!authorList.isEmpty()) {
-            List<AuthorDto> authorDtoList = authorList.stream()
+            List<AuthorDTO> authorDtoList = authorList.stream()
                     .map(AuthorDTOMapper::mapFromAuthor)
                     .collect(Collectors.toList());
             return authorDtoList;
@@ -54,13 +54,13 @@ public class AuthorserviceImpl implements AuthorService {
     }
 
     @Override
-    public AuthorDto findAuthorById(long id) {
+    public AuthorDTO findAuthorById(long id) {
         Optional<Author> author = authorRepository.findById(id);
         if (author.isPresent()) {
 
             Author findingAuthor = author.get();
 
-            AuthorDto authorDto = new AuthorDto();
+            AuthorDTO authorDto = new AuthorDTO();
 
             BeanUtils.copyProperties(findingAuthor, authorDto);
 
@@ -72,14 +72,14 @@ public class AuthorserviceImpl implements AuthorService {
     }
 
     @Override
-    public AuthorDto editAuthor(AuthorRequest authorRequest, long id) {
+    public AuthorDTO editAuthor(AuthorRequest authorRequest, long id) {
         Optional<Author> authorOptional = authorRepository.findById(id);
 
         if (authorOptional.isPresent()) {
             Author author = authorOptional.get();
             Author authorFromRequest = AuthorRequestMapper.mapFromRequest(authorRequest);
 
-            AuthorDto authorDto = new AuthorDto();
+            AuthorDTO authorDto = new AuthorDTO();
 
             author.setName(authorFromRequest.getName());
             author.setSurname(authorFromRequest.getSurname());
@@ -88,9 +88,7 @@ public class AuthorserviceImpl implements AuthorService {
             BeanUtils.copyProperties(author, authorDto);
 
             return authorDto;
-
         }
-
         throw new NullPointerException("Author not found!");
     }
 

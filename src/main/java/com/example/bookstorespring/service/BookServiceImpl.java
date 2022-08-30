@@ -1,12 +1,14 @@
 package com.example.bookstorespring.service;
 
-import com.example.bookstorespring.dto.BookDto;
+import com.example.bookstorespring.dto.BookDTO;
 import com.example.bookstorespring.mapper.BookDTOMapper;
 import com.example.bookstorespring.mapper.BookRequestMapper;
 import com.example.bookstorespring.model.Author;
 import com.example.bookstorespring.model.Book;
+import com.example.bookstorespring.model.Genre;
 import com.example.bookstorespring.repository.AuthorRepository;
 import com.example.bookstorespring.repository.BookRepository;
+import com.example.bookstorespring.repository.GenreRepository;
 import com.example.bookstorespring.request.BookRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,37 +27,38 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
 
+    private final GenreRepository genreRepository;
+
 
     @Override
-    public BookDto createBook(BookRequest request) {
+    public BookDTO createBook(BookRequest request) {
         Book book = BookRequestMapper.mapFromRequest(request);
 
         List<Author> authorListById = authorRepository.findAllById(request.getAuthorIds());
-        if (!authorListById.isEmpty()) {
+        List<Genre> genreListById = genreRepository.findAllById(request.getGenreIds());
+        if (!authorListById.isEmpty() && !genreListById.isEmpty()) {
             book.setAuthorList(authorListById);
-        }else {
+            book.setGenreList(genreListById);
+        } else {
             throw new NullPointerException("Author not found");
         }
+        bookRepository.save(book);
 
-        Book creatingBook = bookRepository.save(book);
-
-        BookDto bookDto = new BookDto();
-        BeanUtils.copyProperties(creatingBook, bookDto);
-        return bookDto;
+        return BookDTOMapper.mapFromBook(book);
 
     }
 
     @Override
-    public List<BookDto> getAllBooks() {
+    public List<BookDTO> getAllBooks() {
         List<Book> bookList = bookRepository.findAll();
         if (!bookList.isEmpty()) {
             log.info("Book List is ready");
 
-            List<BookDto> bookDtoList = bookList
+            List<BookDTO> bookDTOList = bookList
                     .stream()
                     .map(BookDTOMapper::mapFromBook)
                     .collect(Collectors.toList());
-            log.info("Booklist successfully mapped to BookDTO bookDtoList");
+            log.info("Book list successfully mapped to BookDTO bookDtoList");
 
 /*        List<BookDto> bookDtoList = bookList
                 .stream()
@@ -64,7 +67,7 @@ public class BookServiceImpl implements BookService {
                 })
                 .collect(Collectors.toList());*/
 
-            return bookDtoList;
+            return bookDTOList;
         } else {
             log.error("Book List is empty");
             throw new NullPointerException();
@@ -72,13 +75,14 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDto findBookById(long bookId) {
+    public BookDTO findBookById(long bookId) {
 
         Optional<Book> bookById = bookRepository.findById(bookId);
         if (bookById.isPresent()) {
             log.info("Book found");
             Book book = bookById.get();
-            BookDto bookDto = BookDTOMapper.mapFromBook(book);
+            BookDTO bookDto = new BookDTO();
+            BeanUtils.copyProperties(book, bookDto);
             log.info("Book is mapping to BookDto...");
 
             log.info("Book successfully mapped to BookDTO");
@@ -92,7 +96,7 @@ public class BookServiceImpl implements BookService {
 
 
     @Override
-    public BookDto editBook(BookRequest request, long id) {
+    public BookDTO editBook(BookRequest request, long id) {
         log.info("Start");
         Optional<Book> findingBook = bookRepository.findById(id);
         log.info("Book found");
@@ -106,9 +110,9 @@ public class BookServiceImpl implements BookService {
             newBook.setName(book.getName());
             newBook.setPrice(book.getPrice());
             newBook.setStock(book.getStock());
-            log.info("Book informations edited");
+            log.info("Book information edited");
             bookRepository.save(newBook);
-            BookDto bookDto = new BookDto();
+            BookDTO bookDto = new BookDTO();
             BeanUtils.copyProperties(newBook, bookDto);
 
             return bookDto;
