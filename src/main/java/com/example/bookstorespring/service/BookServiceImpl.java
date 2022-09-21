@@ -40,7 +40,7 @@ public class BookServiceImpl implements BookService {
             book.setAuthorList(authorListById);
             book.setGenreList(genreListById);
         } else {
-            throw new NullPointerException("Author not found");
+            throw new NullPointerException("Author or Genre not found");
         }
         bookRepository.save(book);
 

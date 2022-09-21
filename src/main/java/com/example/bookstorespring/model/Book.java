@@ -33,7 +33,7 @@ public class Book {
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     List<Author> authorList;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "genre_id", referencedColumnName = "id")
     List<Genre> genreList;
 
