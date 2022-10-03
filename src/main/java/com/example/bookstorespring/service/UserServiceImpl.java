@@ -27,31 +27,15 @@ import java.util.stream.Collectors;
 @Slf4j
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-    private UserRepository userRepository;
-    private BCryptPasswordEncoder passwordEncoder;
-    private RoleRepository roleRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-
-        if (user == null) {
-            log.info("User found in database : {}", username);
-            JwtUserDetails userDetails = JwtUserDetails.createUserDetails(user);
-            return userDetails;
-        } else {
-            log.error("User not found in database!");
-            throw new UsernameNotFoundException("User not found in database!");
-        }
-
-
-    }
 
     @Override
     public UserDTO createUser(UserRequest userRequest) {
         User user = UserRequestMapper.mapFromRequest(userRequest);
-        UserDTO userDTO = new UserDTO();
+
         List<Role> roleList = roleRepository.findAllById(userRequest.getRoleIds());
 
         if (!roleList.isEmpty()) {
@@ -60,8 +44,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             throw new NullPointerException("Role not found!");
         }
         userRepository.save(user);
+        UserDTO userDTO = UserDTOMapper.mapFromUser(user);
 
-        BeanUtils.copyProperties(user, userDTO);
         return userDTO;
     }
 
@@ -125,6 +109,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void deleteUser(long id) {
         userRepository.deleteById(id);
+
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+
+        if (user == null) {
+            log.info("User found in database : {}", username);
+            JwtUserDetails userDetails = JwtUserDetails.createUserDetails(user);
+            return userDetails;
+        } else {
+            log.error("User not found in database!");
+            throw new UsernameNotFoundException("User not found in database!");
+        }
+
 
     }
 }

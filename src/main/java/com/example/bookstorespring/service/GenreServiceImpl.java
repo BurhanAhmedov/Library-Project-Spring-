@@ -8,7 +8,6 @@ import com.example.bookstorespring.model.Genre;
 import com.example.bookstorespring.repository.GenreRepository;
 import com.example.bookstorespring.request.GenreRequest;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +19,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class GenreServiceImpl implements GenreService {
 
-    private ModelMapper modelMapper;
     private final GenreRepository genreRepository;
 
     @Override

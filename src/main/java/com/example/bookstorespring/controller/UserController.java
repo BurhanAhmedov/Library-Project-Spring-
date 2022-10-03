@@ -13,7 +13,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/user")
 public class UserController {
-    private UserService userService;
+
+    private final UserService userService;
 
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody UserRequest user) {
