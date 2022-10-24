@@ -125,6 +125,17 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public void saleBook(long id){
+        Optional<Book> findingBook = bookRepository.findById(id);
+        if (findingBook.isPresent()){
+            Book book = findingBook.get();
+            bookRepository.saleBook(book.getId());
+        }else
+            throw new NullPointerException("Book not found!");
+
+    }
+
+    @Override
     public void deleteBook(long id) {
         bookRepository.deleteById(id);
     }

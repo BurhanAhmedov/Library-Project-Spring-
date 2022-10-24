@@ -39,6 +39,12 @@ public class BookController {
         return ResponseEntity.ok(bookService.editBook(request, id));
     }
 
+    @PutMapping("/sale/{id}")
+    public ResponseEntity<String> saleBook(@PathVariable long id){
+        bookService.saleBook(id);
+        return ResponseEntity.ok("Book successfully sold");
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteBook(@PathVariable long id) {
         bookService.deleteBook(id);

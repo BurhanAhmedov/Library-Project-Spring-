@@ -11,6 +11,7 @@ public class BookStoreSpringApplication {
     public static void main(String[] args) {
         SpringApplication.run(BookStoreSpringApplication.class, args);
 
+
     }
 
 }

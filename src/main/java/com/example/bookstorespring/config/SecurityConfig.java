@@ -26,15 +26,14 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Autowired
     @Lazy
-    private final UserServiceImpl userService;
+    private  UserServiceImpl userService;
     @Autowired
     private JwtAuthenticationEntryPoint handler;
 
 
-    public SecurityConfig(@Lazy UserServiceImpl userService) {
-        this.userService = userService;
-    }
+
 
     public void configurePasswordEncoder(AuthenticationManagerBuilder builder) throws Exception {
         builder.userDetailsService(userService).passwordEncoder(getBCryptPasswordEncoder());
@@ -64,10 +63,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(handler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/posts")
-                .permitAll()
-                .antMatchers(HttpMethod.GET, "/comments")
-                .permitAll()
                 .antMatchers("/auth/**")
                 .permitAll()
                 .anyRequest().authenticated();
