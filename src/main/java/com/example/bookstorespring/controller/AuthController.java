@@ -1,3 +1,4 @@
+/*
 package com.example.bookstorespring.controller;
 
 import com.example.bookstorespring.model.User;
@@ -51,3 +52,4 @@ public class AuthController {
 
     }
 }
+*/

@@ -8,7 +8,6 @@ import com.example.bookstorespring.model.User;
 import com.example.bookstorespring.repository.RoleRepository;
 import com.example.bookstorespring.repository.UserRepository;
 import com.example.bookstorespring.request.UserRequest;
-import com.example.bookstorespring.security.JwtUserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -24,7 +23,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -110,7 +109,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     }
 
-    @Override
+/*    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
 
@@ -124,5 +123,5 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
 
 
-    }
+    }*/
 }

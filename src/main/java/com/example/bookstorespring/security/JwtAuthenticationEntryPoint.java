@@ -1,3 +1,4 @@
+/*
 package com.example.bookstorespring.security;
 
 import org.springframework.security.core.AuthenticationException;
@@ -16,3 +17,4 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
     }
 }
+*/

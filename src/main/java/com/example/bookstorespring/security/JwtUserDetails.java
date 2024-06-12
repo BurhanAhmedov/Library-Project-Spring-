@@ -1,3 +1,4 @@
+/*
 package com.example.bookstorespring.security;
 
 import com.example.bookstorespring.model.User;
@@ -49,3 +50,4 @@ public class JwtUserDetails implements org.springframework.security.core.userdet
         return true;
     }
 }
+*/

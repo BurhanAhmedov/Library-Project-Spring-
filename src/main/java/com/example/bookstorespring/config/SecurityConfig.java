@@ -1,7 +1,6 @@
+/*
 package com.example.bookstorespring.config;
 
-import com.example.bookstorespring.security.AuthenticationFilter;
-import com.example.bookstorespring.security.JwtAuthenticationEntryPoint;
 import com.example.bookstorespring.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -93,3 +92,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new CorsFilter(source);
     }
 }
+*/

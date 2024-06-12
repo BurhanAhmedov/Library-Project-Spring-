@@ -4,7 +4,9 @@ import com.example.bookstorespring.dto.BookDTO;
 import com.example.bookstorespring.request.BookRequest;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface BookService {
     BookDTO createBook(BookRequest request);
 

@@ -8,7 +8,7 @@ import com.example.bookstorespring.model.Book;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Mapper
 public class BookDTOMapper {
 
     public static BookDTO mapFromBook(Book book) {
